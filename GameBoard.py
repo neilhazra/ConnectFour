@@ -103,7 +103,7 @@ def score_row(row, color):
     k = 1
     for i in range(4):
         if row[i] == color:
-            score += 5 *k;
+            score += 5 * k;
             k+=1
         if row[i] == -color:
             return 0

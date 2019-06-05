@@ -12,7 +12,15 @@ a,b = x.currentBoard.lastMove
 i = 4 #sets the skill level
 
 while True:
-    i += 2
+    if i > 5:
+        i+= 3
+    if i > 10:
+        i+= 4
+    if i > 15:
+        i+= 5
+    else:
+        i+= 2
+
     sv.propagate(x, i)
     print("I moved!")
     #Add code here to display board
