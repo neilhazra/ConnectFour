@@ -74,6 +74,7 @@ class Connect4Board:
                     diagonal_indices_list.append([(i,j),(i+1,j+1),(i+2,j+2),(i+3,j+3)])
                 if i+3 <self.rows and j-3 >= 0:
                     diagonal_indices_list.append([(i,j),(i+1,j-1),(i+2,j-2),(i+3,j-3)])
+
         for four_row in horizontal_indices_list:
             if (self.board[tuple(np.array(four_row).T)] == np.ones(4)).all():
                 return self.board[tuple(np.array(four_row).T)][0];
@@ -83,15 +84,29 @@ class Connect4Board:
         for four_row in diagonal_indices_list:
             if (self.board[tuple(np.array(four_row).T)] == np.ones(4)).all():
                 return self.board[tuple(np.array(four_row).T)][0];
+        for four_row in horizontal_indices_list:
+            if (self.board[tuple(np.array(four_row).T)] == np.negative(np.ones(4))).all():
+                return self.board[tuple(np.array(four_row).T)][0];
+        for four_row in vertical_indices_list:
+            if (self.board[tuple(np.array(four_row).T)] == np.negative(np.ones(4))).all():
+                return self.board[tuple(np.array(four_row).T)][0];
+        for four_row in diagonal_indices_list:
+            if (self.board[tuple(np.array(four_row).T)] == np.negative(np.ones(4))).all():
+                return self.board[tuple(np.array(four_row).T)][0];
+
         return None
     def print_board(self):
         print(np.flip(self.board,0))
 
 def score_row(row, color):
     score = 0
+    k = 1
     for i in range(4):
         if row[i] == color:
-            score += 5;
+            score += 5 *k;
+            k+=1
         if row[i] == -color:
             return 0
+    if k ==4:
+        return 10000
     return score
