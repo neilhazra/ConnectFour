@@ -11,6 +11,7 @@ class Connect4Board:
             self.board = np.zeros(shape=(rows,columns))
         else:
             self.board = np.copy(board)
+        self.four_in_a_row = None
     def get_lowest_unfilled_slot(self, col):
         '''returns the row in a particular column that is unfilled'''
         for i in range(0,self.rows):
@@ -18,6 +19,10 @@ class Connect4Board:
                 return i
         return None
     def score_player(self, color):
+        if self.four_in_a_row == color:
+            return 1000
+        if self.four_in_a_row == -color:
+            return -1000
         score = 0
         horizontal_indices_list = []
         vertical_indices_list = []
@@ -41,6 +46,10 @@ class Connect4Board:
         return score
     def get_possible_moves(self):
         open_cols = []
+        if self.four_in_a_row is None:
+            self.four_in_a_row = self.check_four_in_a_row()
+        if self.four_in_a_row != 0:
+            return open_cols
         for i in range(0,self.columns):
             if self.get_lowest_unfilled_slot(i) is not None:
                 open_cols.append(i)
@@ -93,8 +102,8 @@ class Connect4Board:
         for four_row in diagonal_indices_list:
             if (self.board[tuple(np.array(four_row).T)] == np.negative(np.ones(4))).all():
                 return self.board[tuple(np.array(four_row).T)][0];
+        return 0
 
-        return None
     def print_board(self):
         print(np.flip(self.board,0))
 
@@ -103,10 +112,8 @@ def score_row(row, color):
     k = 1
     for i in range(4):
         if row[i] == color:
-            score += 5 * k;
+            score += 5 * k^2;
             k+=1
         if row[i] == -color:
             return 0
-    if k ==4:
-        return 10000
     return score

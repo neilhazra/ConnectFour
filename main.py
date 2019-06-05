@@ -1,43 +1,36 @@
 import Solver as sv
 import GameBoard as gb
+import pickle as pk
 
-
-
+i = 3 #sets the skill level
 x = sv.TreeSolver(gb.Connect4Board(), 1)
 sv.propagate(x, 3)
+
+
 x,y = sv.minimax(x)
-
-a,b = x.currentBoard.lastMove
-
-i = 4 #sets the skill level
+x.currentBoard.print_board()
 
 while True:
-    if i > 5:
-        i+= 3
-    if i > 10:
-        i+= 4
-    if i > 15:
-        i+= 5
-    else:
-        i+= 2
-
-    sv.propagate(x, i)
-    print("I moved!")
-    #Add code here to display board
-    #i.e graphics.displayBoard(x.currentBoard)
-    x.currentBoard.print_board()
+    i+= 2
     #Add code to determine their move i.e mouse click
     move = input("Make your move")
     x = sv.find_child_node_representing_move(x, int(move))
     #Add code here to display board
     #i.e graphics.displayBoard(x.currentBoard)
     x.currentBoard.print_board()
-    print("I am thinking")
     if x.currentBoard.check_four_in_a_row() == -1:
         print("You Won!")
         break
+
+    print("I am thinking")
+
+    sv.propagate(x, i)
     x, y = sv.minimax(x)
-    a, b = x.currentBoard.lastMove
+
+    print("I moved!")
+    # Add code here to display board
+    # i.e graphics.displayBoard(x.currentBoard)
+    x.currentBoard.print_board()#Add code here to display board
     if x.currentBoard.check_four_in_a_row() == 1:
         print("I Won!")
         break
