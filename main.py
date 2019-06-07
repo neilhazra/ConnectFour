@@ -27,7 +27,7 @@ while True:
     sv.propagate(x, i)
     x, y = sv.minimax(x)
 
-    print("I moved!")
+    print("I moved! Score = " + str(y))
     # Add code here to display board
     # i.e graphics.displayBoard(x.currentBoard)
     x.currentBoard.print_board()#Add code here to display board
