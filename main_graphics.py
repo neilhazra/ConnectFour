@@ -3,9 +3,11 @@ import Solver as sv
 import GameBoard as gb
 import numpy as np
 
-
-
-i = 3#sets the skill level
+try:
+    i = int(input("Please type in a skill level from 1 to 4. 3 is recommended")) #sets the skill level
+except:
+    print("Continuing with default value of 3")
+    i = 3
 x = sv.TreeSolver(gb.Connect4Board(), 1)
 sv.propagate(x, i)
 

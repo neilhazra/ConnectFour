@@ -1,0 +1,14 @@
+Required:
+-Python 3.x
+-numpy
+-tkinter
+
+Once python is installed and added to path install_dependencies.bat can be run from the command line
+to install all necessary libraries and run the main_graphics.py file
+
+run.bat can be run to start the game. The command line will prompt the user for a skill level before starting.
+
+
+
+
+
