@@ -23,7 +23,7 @@ def make_move(move):
     root.update()
     if x.currentBoard.check_four_in_a_row() == -1:
         print("You Won!")
-        quit()
+
 
     print("I'm thinking... Be patient")
     sv.propagate(x, i)
@@ -32,7 +32,7 @@ def make_move(move):
     update_board()
     if x.currentBoard.check_four_in_a_row() == 1:
         print("I Won!")
-        quit()
+        
 
 root = Tk()
 rows = list()
